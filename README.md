@@ -14,21 +14,6 @@ Wikipedia pageview counts are a public proxy for content demand: they capture **
 The core analytical insight is that different content types have fundamentally different shelf-life distributions, not just different average durations. This project serves to suggest that Genre-specific promotion timelines are necessary to avoid wasting budget on content that's already past its peak, or missing the window for content that slowly gains traction.
 
 ---
-## Data Pipeline
-
-### 1. `collect_movies.py`
-
-Pulls American movies from TMDB across 5 genres (Action, Drama, Sci-Fi, Comedy, Horror) and 3 budget tiers (high/mid/low). Budget thresholds are calibrated per genre using films sampled across popularity bands to reduce selection bias. Randomized sampling within each band ensures the dataset isn't dominated by the most culturally prominent titles. Writes to the `movies`, `genre_budget_thresholds`, and `collection_log` tables in SQLite.
-
-### 2. `collect_pageviews.py`
-
-For every movie in the `movies` table, fetches daily Wikipedia pageviews covering 14 days before release through 210 days after. Tries alternate Wikipedia title formats (e.g. `Title (film)`, `Title (2023 film)`) if the primary title isn't found. Logs failures to `pageview_failures` for manual follow-up. Writes to the `pageviews` table.
-
-### 3. `patch_pageviews.py`
-
-One-off helper for movies that failed during the main collection run. Edit the three variables at the top of the file (`MOVIE_ID`, `WIKI_TITLE`, `RELEASE_DATE`) and run it to insert a single movie's pageviews manually.
-
----
 
 ## Analytical Methods
 
