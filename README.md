@@ -30,6 +30,10 @@ This section is extensively covered in the Python notebook found in the reposito
 
 ## Ending Summary, Ethical Concerns, and Reporting Process
 
+### Ending Summary
+
+Using Wikipedia pageviews as a publicly available proxy for public attention (collected via the Wikimedia Foundation's REST API) and movie metadata sourced from The Movie Database (TMDB), I applied survival analysis techniques to 143 films across five genres. The central finding is that **drama films sustain public interest measurably longer than action, comedy, and horror films.** Drama titles carried roughly half the weekly risk of losing their trend compared to action titles (Cox hazard ratio = 0.537, p = 0.032), and this result held after controlling for budget, runtime, franchise status, release season, and early pageview velocity. The typical promotion window across all genres is 5 to 7 weeks, which is far longer than the "opening weekend," suggesting a meaningful, actionable window for content scheduling decisions beyond a film's first few days.
+
 ### Ethical Concerns
 
 **Genre stereotyping and cultural hierarchy.** A finding like "drama lasts longer" risks reinforcing longstanding cultural hierarchies that position drama as a "serious" or "prestige" genre and treat action, horror, and comedy as disposable entertainment. This is not what the data shows. The analysis measures *Wikipedia search interest*, not artistic merit, cultural value, or audience satisfaction. A horror film that trends intensely for three weeks and then fades may have delivered exactly the experience its audience wanted.
