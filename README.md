@@ -1,3 +1,6 @@
+# Which Movie Genre is the Most Timeless?
+
+
 > How long does a title stay trending — and when is the optimal moment to promote it?
 
 This project models content trend shelf life using Wikipedia daily pageviews as a public content demand signal, applies survival analysis to quantify decay rates by genre, and outputs data-driven promotion window recommendations for platform schedulers.
