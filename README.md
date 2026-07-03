@@ -1,5 +1,4 @@
-# Which Movie Genre is the Most Timeless?
-
+# Drama Movies Outlast the Competition: How Genre Shapes the Shelf Life of Public Interest in Film
 
 > How long does a title stay trending — and when is the optimal moment to promote it?
 
@@ -14,28 +13,38 @@ Wikipedia pageview counts are a public proxy for content demand: they capture **
 The core analytical insight is that different content types have fundamentally different shelf-life distributions, not just different average durations. This project serves to suggest that Genre-specific promotion timelines are necessary to avoid wasting budget on content that's already past its peak, or missing the window for content that slowly gains traction.
 
 ---
+## Dataset Sourcing
 
-## Analytical Methods
+TMDB API — A community-built, openly editable database (not a government or academic source), reliable for commercially released American films, with known limitations around budget accuracy and genre simplification.
 
-| Step | Method | Library |
-|---|---|---|
-| Trend death definition | 7-day rolling avg < 20% of peak for 2+ consecutive weeks | `pandas` |
-| Threshold sensitivity | KM curves at 15%, 20%, 25% | `lifelines` |
-| Shelf life by genre | Kaplan-Meier survival curves + pairwise log-rank tests | `lifelines` |
-| Covariate effects | Cox Proportional Hazards with Schoenfeld residual check | `lifelines` |
+Wikimedia Pageviews API — From the Wikimedia Foundation (a 501(c)(3) non-profit), with emphasis on its transparency, reproducibility, academic credibility, and lack of commercials. Some generally accepted challenges include bot filtering, English-language skew, and the gap between curiosity and actual viewing behavior.
+
+Dataset construction challenges — Mainly sample size limitations and selection criteria biases
+---
+
+## Data Analysis
+
+This section is extensively covered in the Python notebook found in the repository (This includes visualizations as well).
 
 ---
 
-## Cox Proportional Hazards Model Features
+## Ending Summary, Ethical Concerns, and Reporting Process
 
-| Feature | Source | Description |
-|---|---|---|
-| `genre` | TMDB | One-hot encoded; baseline = Action |
-| `budget_tier` | Derived from `budget_usd` | Categorized into low/mid/high; one-hot encoded |
-| `runtime` | TMDB | Runtime in minutes |
-| `is_franchise` | TMDB | 1 if part of a collection, 0 otherwise |
-| `release_season` | Derived | Q1/Q2/Q3/Q4 from release date, one-hot encoded |
-| `early_velocity` | Wikipedia days 1–7 | OLS slope of first-week pageviews |
+### Ethical Concerns
+
+**Genre stereotyping and cultural hierarchy.** A finding like "drama lasts longer" risks reinforcing longstanding cultural hierarchies that position drama as a "serious" or "prestige" genre and treat action, horror, and comedy as disposable entertainment. This is not what the data shows. The analysis measures *Wikipedia search interest*, not artistic merit, cultural value, or audience satisfaction. A horror film that trends intensely for three weeks and then fades may have delivered exactly the experience its audience wanted.
+
+**Misrepresenting audience behavior.** Wikipedia pageviews are a measure of curiosity, not consumption. Equating search interest with viewership could mislead decision-makers into under-investing in genres whose audiences engage heavily but search less on Wikipedia.
+
+**Population and language bias.** Wikipedia's readership skews toward English-speaking, higher-income, internet-connected populations. This means the "public interest" we are measuring is not universal public interest — it is predominantly the interest of a specific demographic slice. Films that resonate strongly with non-English-speaking audiences, older demographics, or communities with lower internet access may appear to trend less in this data, not because they are less popular, but because the measurement instrument does not capture their attention.
+
+### What Additional Reporting Would Be Needed
+
+1. **Validation against actual viewership data.** The most critical issue is that Wikipedia pageviews are a proxy, not a direct measure of movie watching. A responsible story would either obtain or reference actual streaming or box office data to confirm whether Wikipedia attention patterns track real consumption.
+
+2. **Expanded and diversified sample.** A journalistically rigorous version of this analysis would expand the dataset beyond 143 American theatrical releases to include international films, direct-to-streaming releases, documentaries, and animated features. It would also extend the observation window beyond 20 weeks to capture the full lifecycle of slow-burn titles.
+
+3. **Reproducibility and transparency.** All code, data, and methodology in this project are open and reproducible, so anyone can query the same APIs and verify the results. A published story should link to the repository and invite scrutiny, which is the journalistic equivalent of showing your work.
 
 ---
 
